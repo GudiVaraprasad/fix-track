@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Ubuntu_Sans } from "next/font/google";
-
+import "@radix-ui/themes/styles.css";
 import "./globals.css";
-import { ThemeProvider } from "./provider";
 import Navbar from "./Navbar";
-
-
+import { Theme } from '@radix-ui/themes';
 
 const myFont = Ubuntu_Sans({ subsets: ["latin"] })
 
@@ -25,16 +23,10 @@ export default function RootLayout({
         <link rel="icon" href="/logo.png" sizes="any" />
       </head>
       <body className={myFont.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-
-        <Navbar />
+        <Theme>
+          <Navbar />
+          <main>{children}</main>
+        </Theme>
       </body>
     </html>
   );

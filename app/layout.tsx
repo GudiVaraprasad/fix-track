@@ -3,7 +3,7 @@ import { Ubuntu_Sans } from "next/font/google";
 import "@radix-ui/themes/styles.css";
 import "./globals.css";
 import Navbar from "./Navbar";
-import { Theme } from '@radix-ui/themes';
+import { Theme, ThemePanel } from '@radix-ui/themes';
 
 const myFont = Ubuntu_Sans({ subsets: ["latin"] })
 
@@ -23,9 +23,10 @@ export default function RootLayout({
         <link rel="icon" href="/logo.png" sizes="any" />
       </head>
       <body className={myFont.className}>
-        <Theme>
+        <Theme accentColor="grass" radius="full">
           <Navbar />
           <main className="p-5">{children}</main>
+          {/* <ThemePanel /> */}
         </Theme>
       </body>
     </html>

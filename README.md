@@ -25,7 +25,8 @@ Follow these steps to set up and run the application:
 
 2. **Configure Environment Variables**  
    - Navigate to the project folder.
-   - Set all required environment variables as required in the `.env` file.
+   - Set all required environment variables as required in the `sample.env` file.
+   - Rename `sample.env` to `.env` file.
 
 3. **Install Dependencies**  
    Run the following command to install all necessary dependencies:

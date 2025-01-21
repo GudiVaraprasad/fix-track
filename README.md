@@ -1,4 +1,4 @@
-## Fix Tracker
+# Fix Tracker
 A full-stack, production-grade bugs and issues tracker with Next.js, Typescript, Tailwind, Radix UI, Prisma, and MySQL.
 
 ## Dashboard

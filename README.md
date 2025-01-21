@@ -20,7 +20,7 @@ Follow these steps to set up and run the application:
 1. **Clone the Repository**  
    Clone this repository to your local machine:
    ```bash
-   git clone https://github.com/GudiVaraprasad/fix-track.git
+   git clone https://github.com/GudiVaraprasad/fix-tracker.git
    ```
 
 2. **Configure Environment Variables**  

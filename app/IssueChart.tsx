@@ -32,7 +32,7 @@ const IssueChart = ({ open, inProgress, closed }: Props) => {
           <Bar
             dataKey="value"
             barSize={60}
-            style={{ fill: 'var(--accent-9)' }}
+            style={{ fill: 'teal' }}
           />
         </BarChart>
       </ResponsiveContainer>

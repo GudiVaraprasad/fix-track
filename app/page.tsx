@@ -1,44 +1,43 @@
-import React from 'react';
-import { Button, Table } from '@radix-ui/themes';
-import Link from 'next/link';
-import { prisma } from '@/prisma/client';
-import StatusBadge from './components/StatusBadge';
-import delay from 'delay';
-import Actions from './Actions';
+import prisma from '@/prisma/client';
+import IssueSummary from './IssueSummary';
+import LatestIssues from './LatestIssues';
+import IssueChart from './IssueChart';
+import { Flex, Grid } from '@radix-ui/themes';
+import { Metadata } from 'next';
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
-  await delay(2000);
+export default async function Home() {
+  const open = await prisma.issue.count({
+    where: { status: 'OPEN' },
+  });
+  const inProgress = await prisma.issue.count({
+    where: { status: 'IN_PROGRESS' },
+  });
+  const closed = await prisma.issue.count({
+    where: { status: 'CLOSED' },
+  });
+
   return (
-    <div>
-      <Actions />
-      <Table.Root variant='surface'>
-        <Table.Header>
-          <Table.Row>
-            <Table.ColumnHeaderCell>Issue</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:table-cell'>Status</Table.ColumnHeaderCell>
-            <Table.ColumnHeaderCell className='hidden md:table-cell'>Created</Table.ColumnHeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {issues.map(issue => (
-            <Table.Row key={issue.id}>
-              <Table.Cell>
-                {issue.title}
-                <div className='block md:hidden'>
-                  <StatusBadge status={issue.status} />
-                </div>
-              </Table.Cell>
-              <Table.Cell className='hidden md:table-cell'>
-                <StatusBadge status={issue.status} />
-              </Table.Cell>
-              <Table.Cell className='hidden md:table-cell'>{issue.createdAt.toDateString()}</Table.Cell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table.Root>
-    </div>
+    <Grid columns={{ initial: '1', md: '2' }} gap="5">
+      <Flex direction="column" gap="5">
+        <IssueSummary
+          open={open}
+          inProgress={inProgress}
+          closed={closed}
+        />
+        <IssueChart
+          open={open}
+          inProgress={inProgress}
+          closed={closed}
+        />
+      </Flex>
+      <LatestIssues />
+    </Grid>
   );
-};
+}
 
-export default IssuesPage;
+export const dynamic = 'force-dynamic'; 
+
+export const metadata: Metadata = {
+  title: 'Issue Tracker - Dashboard',
+  description: 'View a summary of project issues'
+};
